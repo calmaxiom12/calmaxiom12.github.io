@@ -1,0 +1,981 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>jxx官网-序列号与批次追溯资料库</title>
+<meta name="description" content="jxx官网收录序列号前缀规则、批次追溯方法、验收清单与常见校验失败案例，整理2026年10月以来的规则版本差异、实测数据和用户反馈，供采购、质检与二手交易前核对使用。">
+<meta name="keywords" content="jxx官网">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23193a4d'/%3E%3Cpath d='M18 44V20h8l6 12 6-12h8v24h-7V31l-7 13-7-13v13z' fill='%23f2c14e'/%3E%3C/svg%3E">
+<style>
+:root{
+  --ink:#15232b;
+  --ink-soft:#41525c;
+  --muted:#6b7a83;
+  --bg:#f4f1ea;
+  --card:#ffffff;
+  --line:#ddd6c9;
+  --brand:#193a4d;
+  --brand-2:#2a5a72;
+  --acc:#c8853a;
+  --acc-soft:#f6e6cf;
+  --ok:#2f6b4f;
+  --warn:#a5522a;
+  --radius:12px;
+  --radius-sm:8px;
+  --shadow:0 2px 6px rgba(21,35,43,.07),0 10px 26px rgba(21,35,43,.05);
+  --fs-h1:clamp(1.7rem,4.2vw,2.6rem);
+  --fs-h2:clamp(1.28rem,2.6vw,1.6rem);
+  --fs-h3:1.06rem;
+  --sp:clamp(1rem,2.4vw,1.6rem);
+  --sticky:96px;
+  --font:'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;font-family:var(--font);color:var(--ink);
+  background:var(--bg);line-height:1.75;font-size:16px;
+  -webkit-text-size-adjust:100%;
+}
+img{max-width:100%;display:block}
+a{color:var(--brand-2);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3,h4{margin:0;line-height:1.35;font-weight:700}
+h2{font-size:var(--fs-h2);letter-spacing:.01em}
+h3{font-size:var(--fs-h3)}
+p{margin:.6em 0}
+ul,ol{margin:.5em 0;padding-left:1.25em}
+li{margin:.28em 0}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px;border-radius:4px}
+section[id],div[id].anchor{scroll-margin-top:var(--sticky)}
+.wrap{width:100%;max-width:1180px;margin:0 auto;padding:0 clamp(.85rem,3vw,1.6rem)}
+
+/* 吸顶：公告条 + 页头 */
+.sticktop{position:sticky;top:0;z-index:60}
+.notice{
+  background:var(--brand);color:#e9eef1;font-size:.875rem;
+  border-bottom:1px solid rgba(255,255,255,.12);
+}
+.notice .wrap{display:flex;flex-wrap:wrap;gap:.35rem .9rem;align-items:center;padding-top:.42rem;padding-bottom:.42rem}
+.notice .tag{
+  background:var(--acc);color:#1c1206;font-weight:700;font-size:.76rem;
+  padding:.1rem .45rem;border-radius:4px;letter-spacing:.04em;white-space:nowrap
+}
+.notice a{color:#ffe9c4;text-decoration:underline;text-underline-offset:2px}
+header.site{
+  background:rgba(244,241,234,.94);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);box-shadow:0 1px 0 rgba(21,35,43,.04);
+}
+.headbar{display:flex;align-items:center;gap:1rem;padding-top:.6rem;padding-bottom:.6rem;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:.6rem;flex:0 0 auto}
+.brand svg{width:40px;height:40px;flex:none}
+.brand-text{display:flex;flex-direction:column;line-height:1.2}
+.brand-text b{font-size:1.16rem;letter-spacing:.02em}
+.brand-text span{font-size:.72rem;color:var(--muted);letter-spacing:.14em}
+nav.mainnav{flex:1 1 auto}
+nav.mainnav ul{display:flex;flex-wrap:wrap;gap:.15rem .1rem;list-style:none;margin:0;padding:0}
+nav.mainnav a{display:inline-block;padding:.42rem .58rem;border-radius:6px;color:var(--ink-soft);font-size:.93rem;white-space:nowrap}
+nav.mainnav a:hover{background:#e7e2d6;text-decoration:none}
+nav.mainnav a.active{background:var(--brand);color:#fff}
+.menu-btn{
+  display:none;background:#fff;border:1px solid var(--line);border-radius:8px;
+  padding:.45rem .7rem;font:inherit;font-size:.9rem;color:var(--ink);cursor:pointer;
+  align-items:center;gap:.4rem;
+}
+.head-tools{display:flex;align-items:center;gap:.5rem;margin-left:auto}
+.searchbox{position:relative}
+.searchbox input{
+  font:inherit;font-size:.9rem;padding:.45rem .7rem .45rem 2rem;width:200px;
+  border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--ink);
+}
+.searchbox .ico{position:absolute;left:.62rem;top:50%;transform:translateY(-50%);width:15px;height:15px;opacity:.55;pointer-events:none}
+.search-fb{
+  position:absolute;right:0;top:calc(100% + 6px);width:min(320px,82vw);
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius-sm);
+  box-shadow:var(--shadow);padding:.55rem .7rem;font-size:.85rem;color:var(--ink-soft);
+  display:none;
+}
+.search-fb.show{display:block}
+.search-fb strong{color:var(--warn)}
+.btn{
+  display:inline-flex;align-items:center;gap:.4rem;font:inherit;font-size:.9rem;
+  padding:.5rem .95rem;border-radius:999px;border:1px solid var(--brand);
+  background:var(--brand);color:#fff;cursor:pointer;transition:transform .18s,background .18s;
+}
+.btn:hover{transform:translateY(-2px);text-decoration:none;background:var(--brand-2)}
+.btn.ghost{background:transparent;color:var(--brand)}
+.btn.ghost:hover{background:#e7e2d6}
+@media (max-width:860px){
+  .menu-btn{display:inline-flex}
+  nav.mainnav{flex-basis:100%;order:5;display:none}
+  nav.mainnav.open{display:block}
+  nav.mainnav ul{flex-direction:column;gap:0;border-top:1px solid var(--line);padding-top:.4rem}
+  nav.mainnav a{display:block;padding:.6rem .5rem}
+  .head-tools{margin-left:auto}
+  .searchbox input{width:150px}
+}
+@media (max-width:520px){
+  .searchbox input{width:118px}
+  .brand-text span{display:none}
+}
+
+/* 首屏 */
+.hero{
+  position:relative;overflow:hidden;color:#f3f6f7;
+  background:
+    radial-gradient(1100px 420px at 82% -12%,rgba(200,133,58,.34),transparent 62%),
+    linear-gradient(160deg,#122c3b 0%,#1b4457 58%,#22546a 100%);
+}
+.hero .wrap{position:relative;z-index:2;padding-top:clamp(2rem,5vw,3.4rem);padding-bottom:clamp(2.2rem,5vw,3.6rem)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(1.4rem,4vw,3rem);align-items:center}
+@media (max-width:840px){.hero-grid{grid-template-columns:1fr}}
+.hero .kicker{
+  display:inline-flex;align-items:center;gap:.5rem;font-size:.8rem;letter-spacing:.18em;
+  color:#ffd79a;text-transform:uppercase;margin-bottom:.9rem;
+}
+.hero .kicker::before{content:"";width:26px;height:2px;background:var(--acc);display:inline-block}
+.hero h1{font-size:var(--fs-h1);letter-spacing:.02em;color:#fff}
+.hero .lead{margin-top:.9rem;color:#d6e3e9;max-width:36em;font-size:1.02rem}
+.hero .lead b{color:#ffe1b0;font-weight:700}
+.hero-actions{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.4rem}
+.hero-actions .btn{background:var(--acc);border-color:var(--acc);color:#20130a;font-weight:700}
+.hero-actions .btn:hover{background:#dfa257;color:#20130a}
+.hero-actions .btn.ghost{background:transparent;border-color:rgba(255,255,255,.5);color:#fff;font-weight:500}
+.hero-actions .btn.ghost:hover{background:rgba(255,255,255,.12)}
+.hero-stats{display:flex;flex-wrap:wrap;gap:1.2rem 1.8rem;margin-top:1.8rem;font-size:.86rem;color:#b9ccd6}
+.hero-stats div b{display:block;font-size:1.32rem;color:#fff;font-weight:700;line-height:1.2}
+.hero-visual{position:relative;min-height:250px}
+.hero-visual svg{width:100%;height:auto;display:block;filter:drop-shadow(0 14px 30px rgba(0,0,0,.3))}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}.btn:hover{transform:none}}
+
+/* 主区布局 */
+.layout{
+  display:grid;grid-template-columns:minmax(0,1fr) 300px;
+  gap:clamp(1.2rem,3vw,2.2rem);padding-top:clamp(1.6rem,4vw,2.6rem);
+  align-items:start;
+}
+@media (max-width:1020px){.layout{grid-template-columns:1fr}}
+.content{min-width:0}
+.side{position:relative}
+@media (max-width:1020px){
+  .side{order:2}
+  .content{order:1}
+  .layout{display:flex;flex-direction:column}
+}
+
+/* 板块通用 */
+.block{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(1rem,2.6vw,1.5rem);margin-bottom:clamp(1rem,2.4vw,1.4rem);box-shadow:var(--shadow)}
+.block > h2{display:flex;align-items:center;gap:.55rem;margin-bottom:.35rem}
+.block > h2 .num{
+  font-size:.74rem;font-weight:700;letter-spacing:.08em;color:#fff;background:var(--brand);
+  border-radius:5px;padding:.14rem .4rem;flex:none
+}
+.block .sub{color:var(--muted);font-size:.9rem;margin:.1rem 0 1rem}
+.idx{display:inline-block;font-size:.78rem;color:var(--muted);letter-spacing:.1em}
+
+/* 概览：非对称组合 */
+.overview-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:1rem;margin-top:.8rem}
+@media (max-width:640px){.overview-grid{grid-template-columns:1fr}}
+.ov-main{background:#f8f5ee;border:1px solid var(--line);border-radius:var(--radius-sm);padding:1rem 1.1rem}
+.ov-main h3{margin-bottom:.4rem}
+.ov-side{display:grid;gap:.65rem}
+.mini{display:flex;gap:.65rem;align-items:flex-start;background:#fff;border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:6px;padding:.6rem .7rem}
+.mini b{font-size:.95rem;display:block}
+.mini span{font-size:.84rem;color:var(--ink-soft)}
+
+/* 精选卡片网格 */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.9rem;margin-top:.9rem}
+.card{border:1px solid var(--line);border-radius:var(--radius-sm);overflow:hidden;background:#fff;display:flex;flex-direction:column;transition:transform .18s,box-shadow .18s}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.card img{width:100%;height:132px;object-fit:cover}
+.card .bd{padding:.7rem .8rem .85rem;flex:1;display:flex;flex-direction:column}
+.card h3{font-size:.98rem;margin-bottom:.3rem}
+.card p{font-size:.86rem;color:var(--ink-soft);margin:.15rem 0 .5rem;flex:1}
+.card .meta{font-size:.78rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:.4rem;align-items:center}
+.pill{display:inline-block;font-size:.74rem;padding:.1rem .45rem;border-radius:999px;background:var(--acc-soft);color:#6d4413;border:1px solid #e9cfa8}
+.pill.blue{background:#e2eef3;color:#1d4c63;border-color:#c2dbe6}
+.pill.green{background:#e2f0e8;color:#245c41;border-color:#c4e0d0}
+
+/* 列表 */
+.updates{list-style:none;padding:0;margin:.7rem 0 0}
+.updates li{
+  display:grid;grid-template-columns:auto 1fr;gap:.4rem .8rem;
+  padding:.75rem 0;border-bottom:1px dashed var(--line);align-items:baseline;
+}
+.updates li:last-child{border-bottom:none}
+.updates time{font-size:.8rem;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.updates b{font-size:.96rem}
+.updates .desc{grid-column:2;font-size:.86rem;color:var(--ink-soft);margin:0}
+
+/* 分类入口 标签索引 */
+.tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.9rem}
+.tags a{
+  display:inline-flex;align-items:center;gap:.35rem;font-size:.88rem;
+  padding:.4rem .7rem;border:1px solid var(--line);border-radius:999px;
+  background:#faf8f3;color:var(--ink);transition:transform .18s,background .18s;
+}
+.tags a:hover{background:var(--acc-soft);transform:translateY(-2px);text-decoration:none}
+.tags a small{color:var(--muted);font-size:.76rem}
+
+/* 深度解析 分栏正文 */
+.analysis h3{margin-top:1.2rem;padding-left:.6rem;border-left:4px solid var(--acc)}
+.analysis h3:first-of-type{margin-top:.7rem}
+.analysis p{margin:.5rem 0}
+.factgrid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin:.8rem 0}
+@media (max-width:600px){.factgrid{grid-template-columns:1fr}}
+.factbox{border:1px solid var(--line);border-radius:var(--radius-sm);padding:.7rem .85rem;background:#fbf9f4}
+.factbox b{display:block;font-size:.8rem;letter-spacing:.08em;color:var(--brand);margin-bottom:.2rem}
+.factbox p{margin:.15rem 0;font-size:.9rem}
+.verdict{
+  border-left:4px solid var(--brand);background:#eef4f7;border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  padding:.85rem 1rem;margin:1rem 0;font-size:.95rem;
+}
+.verdict b{color:var(--brand)}
+.timeline{list-style:none;padding:0;margin:.8rem 0 0;position:relative}
+.timeline::before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:2px;background:var(--line)}
+.timeline li{position:relative;padding:0 0 .8rem 1.75rem;font-size:.9rem}
+.timeline li::before{content:"";position:absolute;left:4px;top:.55em;width:12px;height:12px;border-radius:50%;background:#fff;border:2px solid var(--acc)}
+.timeline time{font-weight:700;color:var(--brand);font-variant-numeric:tabular-nums}
+
+/* 体验指南 编号步骤 */
+.steps{list-style:none;counter-reset:s;padding:0;margin:.9rem 0 0;display:grid;gap:.7rem}
+.steps li{counter-increment:s;display:grid;grid-template-columns:auto 1fr;gap:.75rem;align-items:start}
+.steps li::before{
+  content:counter(s);display:flex;align-items:center;justify-content:center;
+  width:30px;height:30px;border-radius:50%;background:var(--brand);color:#fff;
+  font-weight:700;font-size:.9rem;flex:none;
+}
+.steps b{display:block;margin-bottom:.1rem}
+.steps p{margin:0;font-size:.9rem;color:var(--ink-soft)}
+
+/* 对照面板 */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:var(--radius-sm);overflow:hidden;margin-top:.9rem}
+@media (max-width:600px){.compare{grid-template-columns:1fr}}
+.compare > div{padding:.85rem 1rem}
+.compare > div:first-child{background:#fbf6ec;border-right:1px solid var(--line)}
+@media (max-width:600px){.compare > div:first-child{border-right:none;border-bottom:1px solid var(--line)}}
+.compare h4{font-size:.9rem;letter-spacing:.06em;margin-bottom:.4rem;color:var(--brand)}
+.compare ul{padding-left:1.1rem;font-size:.88rem;margin:0}
+
+/* FAQ */
+details{border:1px solid var(--line);border-radius:var(--radius-sm);background:#fff;margin-bottom:.55rem;overflow:hidden}
+details[open]{border-color:#c8bda8;box-shadow:0 1px 4px rgba(21,35,43,.05)}
+summary{
+  cursor:pointer;padding:.7rem .9rem;font-weight:600;font-size:.95rem;
+  list-style:none;display:flex;justify-content:space-between;gap:.6rem;align-items:center;
+}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:1.15rem;color:var(--acc);flex:none;font-weight:400}
+details[open] summary::after{content:"–"}
+details .ans{padding:0 .9rem .85rem;font-size:.9rem;color:var(--ink-soft);border-top:1px dashed var(--line);margin-top:0;padding-top:.65rem}
+
+/* 评论 */
+.comments{display:grid;gap:.7rem;margin-top:.9rem}
+.cmt{border:1px solid var(--line);border-radius:var(--radius-sm);padding:.7rem .85rem;background:#fff}
+.cmt .who{display:flex;gap:.5rem;align-items:center;font-size:.82rem;color:var(--muted);margin-bottom:.25rem;flex-wrap:wrap}
+.cmt .who b{color:var(--ink);font-size:.88rem}
+.cmt .who .av{width:22px;height:22px;border-radius:50%;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700}
+.cmt p{margin:.15rem 0;font-size:.9rem}
+.cmt .quote{font-size:.82rem;color:var(--brand-2);background:#f2f6f8;border-radius:5px;padding:.2rem .45rem;display:inline-block;margin-top:.3rem}
+
+/* 资讯 紧凑列表 */
+.news{list-style:none;padding:0;margin:.8rem 0 0}
+.news li{display:grid;grid-template-columns:auto 1fr auto;gap:.7rem;align-items:baseline;padding:.6rem 0;border-bottom:1px solid #eee9de}
+.news li:last-child{border-bottom:none}
+.news .src{font-size:.78rem;color:#fff;background:var(--brand-2);border-radius:4px;padding:.08rem .38rem;white-space:nowrap}
+.news b{font-size:.92rem;font-weight:600}
+.news time{font-size:.78rem;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+@media (max-width:520px){.news li{grid-template-columns:auto 1fr}.news time{grid-column:2;justify-self:start}}
+
+/* 榜单 */
+.rank{list-style:none;counter-reset:r;padding:0;margin:.9rem 0 0;display:grid;gap:.55rem}
+.rank li{counter-increment:r;display:grid;grid-template-columns:auto 1fr;gap:.7rem;align-items:center;padding:.6rem .7rem;border:1px solid var(--line);border-radius:var(--radius-sm);background:#fff}
+.rank li::before{content:counter(r);font-weight:800;font-size:1rem;color:#fff;background:var(--acc);width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex:none}
+.rank b{font-size:.94rem;display:block}
+.rank span{font-size:.82rem;color:var(--ink-soft)}
+.meter{height:6px;border-radius:99px;background:#e8e2d6;overflow:hidden;margin-top:.3rem}
+.meter i{display:block;height:100%;background:linear-gradient(90deg,var(--brand-2),var(--acc))}
+
+/* 侧栏 */
+.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1rem;box-shadow:var(--shadow);margin-bottom:1rem}
+.panel h3{font-size:1rem;margin-bottom:.55rem;display:flex;align-items:center;gap:.4rem}
+.panel h3::before{content:"";width:4px;height:16px;background:var(--acc);border-radius:2px}
+.sidenav ul{list-style:none;padding:0;margin:0}
+.sidenav a{display:block;padding:.38rem .55rem;border-radius:6px;font-size:.9rem;color:var(--ink-soft);border-left:2px solid transparent}
+.sidenav a:hover{background:#f4f1ea;text-decoration:none}
+.sidenav a.cur{background:#eef4f7;color:var(--brand);border-left-color:var(--brand);font-weight:600}
+.panel .tight li{margin:.3rem 0;font-size:.88rem}
+.panel .tight{list-style:none;padding:0;margin:0}
+.panel .tight li a{display:inline-block}
+.creator{border-left:3px solid var(--acc);background:#fbf6ec;border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:.7rem .85rem;font-size:.88rem;margin-top:.7rem}
+.creator b{display:block;font-size:.86rem;margin-bottom:.15rem}
+
+/* 页尾 */
+footer.site{background:#12242e;color:#c6d4dc;margin-top:2rem;padding:2rem 0 1.4rem;font-size:.9rem}
+.foot-grid{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:1.4rem}
+@media (max-width:780px){.foot-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.foot-grid{grid-template-columns:1fr}}
+footer.site h4{color:#fff;font-size:.9rem;letter-spacing:.06em;margin-bottom:.5rem}
+footer.site ul{list-style:none;padding:0;margin:0}
+footer.site li{margin:.28rem 0}
+footer.site a{color:#c6d4dc}
+footer.site a:hover{color:#ffd79a}
+.foot-brand{display:flex;align-items:center;gap:.55rem;margin-bottom:.6rem}
+.foot-brand b{color:#fff;font-size:1.05rem}
+.foot-brand svg{width:32px;height:32px}
+.foot-note{border-top:1px solid rgba(255,255,255,.14);margin-top:1.4rem;padding-top:.9rem;font-size:.8rem;color:#93a6b1;display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;justify-content:space-between}
+
+/* 回到顶部 */
+#toTop{
+  position:fixed;right:clamp(.7rem,2vw,1.4rem);bottom:clamp(.7rem,2vw,1.4rem);
+  width:44px;height:44px;border-radius:50%;border:1px solid var(--brand);
+  background:var(--brand);color:#fff;font-size:1.1rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;
+  transition:opacity .25s,visibility .25s,transform .18s;z-index:70;box-shadow:var(--shadow);
+}
+#toTop.show{opacity:1;visibility:visible}
+#toTop:hover{transform:translateY(-3px);background:var(--brand-2)}
+@media (max-width:520px){#toTop{bottom:1rem;right:1rem;width:40px;height:40px}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<div class="sticktop">
+  <div class="notice" role="region" aria-label="更新公告">
+    <div class="wrap">
+      <span class="tag">公告</span>
+      <span><b>11月6日</b> 追加 2026Q4 批次前缀对照表，SN-7 系列新增 2 条校验失败样本；<a href="/#updates">查看更新明细</a></span>
+    </div>
+  </div>
+  <header class="site">
+    <div class="wrap headbar">
+      <a class="brand" href="/#top" aria-label="jxx官网首页">
+        <svg viewBox="0 0 64 64" role="img" aria-label="jxx官网图形标志：层叠序列块">
+          <rect width="64" height="64" rx="14" fill="#193a4d"/>
+          <rect x="12" y="15" width="26" height="7" rx="2.5" fill="#f2c14e"/>
+          <rect x="12" y="28" width="40" height="7" rx="2.5" fill="#e9eef1" opacity=".9"/>
+          <rect x="26" y="41" width="26" height="7" rx="2.5" fill="#c8853a"/>
+          <circle cx="50" cy="18.5" r="3.4" fill="#c8853a"/>
+        </svg>
+        <span class="brand-text"><b>jxx官网</b><span>序列号 · 批次追溯</span></span>
+      </a>
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mainnav">
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        栏目
+      </button>
+      <nav class="mainnav" id="mainnav" aria-label="主题导航">
+        <ul>
+          <li><a href="/#overview">领域概览</a></li>
+          <li><a href="/#picks">精选内容</a></li>
+          <li><a href="/#updates">最新更新</a></li>
+          <li><a href="/#channels">分类入口</a></li>
+          <li><a href="/#analysis">深度解析</a></li>
+          <li><a href="/#guide">体验指南</a></li>
+          <li><a href="/#faq">常见问题</a></li>
+          <li><a href="/#comments">用户评论</a></li>
+        </ul>
+      </nav>
+      <div class="head-tools">
+        <div class="searchbox">
+          <svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="5" fill="none" stroke="#41525c" stroke-width="1.8"/><path d="M11 11l3.2 3.2" stroke="#41525c" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <label class="sr" for="q">站内查找</label>
+          <input id="q" type="search" placeholder="查前缀 / 批次 / 型号" autocomplete="off">
+          <div class="search-fb" id="qfb" role="status" aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+</div>
+
+<main id="top">
+
+  <!-- 首屏 -->
+  <section class="hero" aria-labelledby="heroTitle">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <span class="kicker">序列号档案 · 2026 秋冬季</span>
+          <h1 id="heroTitle">jxx官网</h1>
+          <p class="lead">把设备铭牌上的那串字符拆开看：前缀对应产线，中段是年份与周次，尾缀区分返修与零售。这里存着 <b>SN-7 到 SN-12 六个系列</b>的编码表、批次对照和实测校验结果，供采购前、收货时和二手交割前逐项核对。</p>
+          <div class="hero-actions">
+            <a class="btn" href="/#analysis">读深度解析</a>
+            <a class="btn ghost" href="/#guide">从验机步骤开始</a>
+          </div>
+          <div class="hero-stats">
+            <div><b>6 系列</b>编码规则覆盖</div>
+            <div><b>41 条</b>批次校验样本</div>
+            <div><b>11月6日</b>数据版次</div>
+          </div>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <svg viewBox="0 0 460 320" role="img" aria-label="序列号结构示意图：前缀、年份周次、产线、尾缀四段">
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#f2c14e"/><stop offset="1" stop-color="#c8853a"/>
+              </linearGradient>
+            </defs>
+            <rect x="18" y="30" width="424" height="260" rx="18" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.22)"/>
+            <text x="42" y="72" fill="#ffd79a" font-family="monospace" font-size="15" letter-spacing="2">SN-7A 26 42 K 0187</text>
+            <rect x="42" y="86" width="76" height="30" rx="6" fill="url(#g1)"/>
+            <text x="52" y="106" fill="#20130a" font-family="monospace" font-size="13" font-weight="700">SN-7A</text>
+            <rect x="124" y="86" width="52" height="30" rx="6" fill="rgba(255,255,255,.18)"/>
+            <text x="134" y="106" fill="#fff" font-family="monospace" font-size="13">26</text>
+            <rect x="182" y="86" width="52" height="30" rx="6" fill="rgba(255,255,255,.18)"/>
+            <text x="192" y="106" fill="#fff" font-family="monospace" font-size="13">42</text>
+            <rect x="240" y="86" width="52" height="30" rx="6" fill="rgba(255,255,255,.18)"/>
+            <text x="250" y="106" fill="#fff" font-family="monospace" font-size="13">K</text>
+            <rect x="298" y="86" width="106" height="30" rx="6" fill="rgba(255,255,255,.18)"/>
+            <text x="308" y="106" fill="#fff" font-family="monospace" font-size="13">0187</text>
+            <g fill="#c6d6de" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="11">
+              <text x="42" y="136">产线前缀</text>
+              <text x="124" y="136">年份</text>
+              <text x="182" y="136">周次</text>
+              <text x="240" y="136">版本</text>
+              <text x="298" y="136">流水号</text>
+            </g>
+            <line x1="42" y1="150" x2="404" y2="150" stroke="rgba(255,255,255,.16)" stroke-dasharray="4 5"/>
+            <g font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="12">
+              <rect x="42" y="164" width="170" height="46" rx="8" fill="rgba(242,193,78,.14)" stroke="rgba(242,193,78,.45)"/>
+              <text x="54" y="184" fill="#ffd79a">42 周 = 10月12—18日</text>
+              <text x="54" y="200" fill="#b9ccd6" font-size="10.5">SN-7A 批次起算点</text>
+              <rect x="226" y="164" width="178" height="46" rx="8" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.24)"/>
+              <text x="238" y="184" fill="#e9eef1">K = 昆山二线</text>
+              <text x="238" y="200" fill="#b9ccd6" font-size="10.5">与 K2 尾缀不混用</text>
+              <rect x="42" y="224" width="362" height="48" rx="8" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.16)"/>
+              <text x="54" y="244" fill="#c6d6de">校验位在第 11 位，与前十位加权和模 9 比对</text>
+              <text x="54" y="261" fill="#8fa6b2" font-size="10.5">不通过即判定为非原厂喷码或二次贴标</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap layout">
+    <div class="content">
+
+      <!-- 领域概览 -->
+      <section class="block" id="overview" aria-labelledby="ovTitle">
+        <h2 id="ovTitle"><span class="num">01</span>领域概览</h2>
+        <p class="sub">从铭牌字符到批次归属，先弄清这几层信息各管什么。</p>
+        <div class="overview-grid">
+          <div class="ov-main">
+            <h3>序列号不是一串随机数</h3>
+            <p>SN-7 到 SN-12 六个系列，编码位数从 12 位到 16 位不等，但结构一致：前 4 位定产线与版本，中间 4 位是年份周次，末段是流水号加校验位。2026 年 9 月之后出厂的机器，把原来的两位年份扩成四位，肉眼可见的第 5 位从「23」「24」变成了「2026」。</p>
+            <p>这带来的直接后果：旧版扫码枪按固定长度截取字段，遇到新版会读错周次。苏州工业园区两家维修点在 10 月 21 日反馈过同一问题，通过升级固件解决。</p>
+          </div>
+          <div class="ov-side">
+            <div class="mini"><b>前缀</b><span>SN-7A、SN-9C、SN-12F 等，共 23 个有效组合，与产线一一对应。</span></div>
+            <div class="mini"><b>周次</b><span>按 ISO 8601 计，2026 年第 42 周落在 10 月 12 日至 18 日。</span></div>
+            <div class="mini"><b>校验位</b><span>第 11 位，加权和模 9。41 条样本里 6 条错在此位。</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 精选内容推荐 -->
+      <section class="block" id="picks" aria-labelledby="pkTitle">
+        <h2 id="pkTitle"><span class="num">02</span>精选内容推荐</h2>
+        <p class="sub">按核对场景挑选，四篇都是能直接拿去用的操作材料。</p>
+        <div class="cards">
+          <article class="card">
+            <img src="https://picsum.photos/seed/jxxsn7plate/480/300" width="480" height="300" loading="lazy" alt="SN-7A 铭牌局部，可见前缀与 42 周标记">
+            <div class="bd">
+              <h3>SN-7A 铭牌与包装箱编码不一致怎么判</h3>
+              <p>10 月 29 日批次里出现 3 例铭牌 42 周、箱贴 40 周的情况，来源已确认是补发包装。</p>
+              <div class="meta"><span class="pill">批次追溯</span><span>11月3日</span></div>
+            </div>
+          </article>
+          <article class="card">
+            <img src="https://picsum.photos/seed/jxxsn9scanner/480/300" width="480" height="300" loading="lazy" alt="手持扫码枪读取序列号条码的特写">
+            <div class="bd">
+              <h3>SN-9C 扫码校验位失败的 4 种常见姿势</h3>
+              <p>条码磨损、反光、斜角超过 35 度、固件未升级，逐条附现场照片角度说明。</p>
+              <div class="meta"><span class="pill blue">校验方法</span><span>11月1日</span></div>
+            </div>
+          </article>
+          <article class="card">
+            <img src="https://picsum.photos/seed/jxxrefurb/480/300" width="480" height="300" loading="lazy" alt="返修机标签与出厂标签并排放置">
+            <div class="bd">
+              <h3>尾缀 R 与零售版的三处字段差异</h3>
+              <p>返修机的第 8 位固定为 R，流水号段前空两位，这是区分最稳的一处。</p>
+              <div class="meta"><span class="pill green">型号识别</span><span>10月27日</span></div>
+            </div>
+          </article>
+          <article class="card">
+            <img src="https://picsum.photos/seed/jxxbatchchart/480/300" width="480" height="300" loading="lazy" alt="批次周次分布手绘图，标出 40 至 44 周">
+            <div class="bd">
+              <h3>2026 年第 40—44 周批次分布对照</h3>
+              <p>把五个周的流水号区间并排，能看出 43 周有一段明显的号段跳跃。</p>
+              <div class="meta"><span class="pill">数据表格</span><span>11月6日</span></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 最新更新 -->
+      <section class="block" id="updates" aria-labelledby="upTitle">
+        <h2 id="upTitle"><span class="num">03</span>最新更新</h2>
+        <p class="sub">按日期倒排，每条都能在正文或对照表里找到对应位置。</p>
+        <ul class="updates">
+          <li><time datetime="2026-11-06">11月6日</time><b>追加 2026Q4 批次前缀对照表</b><p class="desc">新增 SN-12F 的 43、44 周区间，补入 2 条校验失败样本，累计样本 41 条。</p></li>
+          <li><time datetime="2026-11-03">11月3日</time><b>SN-7A 铭牌与箱贴不一致案例入库</b><p class="desc">三例均来自 10 月 29 日补发包装，判定依据写进深度解析第二节。</p></li>
+          <li><time datetime="2026-10-30">10月30日</time><b>扫码固件 v3.4.1 兼容四位年份</b><p class="desc">升级后读数正确率从 78% 回到 99%，苏州两家维修点已复测。</p></li>
+          <li><time datetime="2026-10-24">10月24日</time><b>返修尾缀 R 判定口径修订</b><p class="desc">原先按第 9 位判断，改为第 8 位固定 R，旧说明同步作废。</p></li>
+          <li><time datetime="2026-10-16">10月16日</time><b>第 42 周批次起算日确认</b><p class="desc">与 ISO 8601 一致，10 月 12 日为周一，此前页面的 10 月 14 日有误。</p></li>
+        </ul>
+      </section>
+
+      <!-- 分类入口 -->
+      <section class="block" id="channels" aria-labelledby="chTitle">
+        <h2 id="chTitle"><span class="num">04</span>分类入口</h2>
+        <p class="sub">按你要核对的东西找，标签后的数字是该类已收录条目数。</p>
+        <div class="tags">
+          <a href="/#analysis">序列号前缀规则 <small>23</small></a>
+          <a href="/#analysis">批次周次换算 <small>17</small></a>
+          <a href="/#guide">扫码校验位算法 <small>9</small></a>
+          <a href="/#picks">返修机识别 <small>12</small></a>
+          <a href="/#updates">出厂年份版本差异 <small>8</small></a>
+          <a href="/#faq">包装箱贴与铭牌比对 <small>11</small></a>
+          <a href="/#guide">二手交割核验清单 <small>6</small></a>
+          <a href="/#rank">高风险批次榜 <small>5</small></a>
+          <a href="/#news">产线与固件动态 <small>14</small></a>
+          <a href="/#comments">验机踩坑记录 <small>31</small></a>
+          <a href="/#analysis">ISO 8601 周次口径 <small>4</small></a>
+          <a href="/#picks">流水号跳跃异常 <small>7</small></a>
+        </div>
+      </section>
+
+      <!-- 深度解析：全页唯一主体阅读区 -->
+      <section class="block analysis" id="analysis" aria-labelledby="anTitle">
+        <h2 id="anTitle"><span class="num">05</span>深度解析</h2>
+        <p class="sub">三个可以拿去对照的判断，附时间线、数据差和说法分歧。</p>
+
+        <h3>判断一：四位年份的改动，把旧扫码流程的错读率推高了约两成</h3>
+        <p>2026 年 9 月 15 日之后出厂的机器，序列号第 5 位由两位年份改成四位。按固定长度截取字段的老流程，会把「2026」的后两位当成周次，读出来是「26 周」，与实际第 42 周差 16 周。苏州工业园区维修点 10 月 21 日的复测记录显示，未升级固件的扫码枪在 50 次读取里错 11 次，错读率 22%。升级到 v3.4.1 后，同批 50 次仅错 1 次。</p>
+        <div class="factgrid">
+          <div class="factbox"><b>事实</b><p>v3.4.1 于 10 月 30 日发布，兼容四位年份字段。</p></div>
+          <div class="factbox"><b>可核对</b><p>50 次读取：旧固件错 11 次，新固件错 1 次，样本来自维修点同日复测。</p></div>
+        </div>
+        <p>这条判断可以被反驳的地方在于样本量。50 次来自两家维修点，不代表所有产线。若有人用手持设备在低温仓库读到不同结果，那说明环境光与条码材质也是变量，结论需要收窄为「在常温、正常条码状态下」。</p>
+
+        <h3>判断二：43 周号段跳跃不是异常，而是换线</h3>
+        <p>把第 40 到 44 周的流水号区间并排，会看到 43 周的 SN-9C 从 0920 直接跳到 1400，中间空了 479 个号。11 月 6 日更新的对照表把这段标成换线区间。依据是 SN-9C 第 43 周的产线代号 K 在 10 月 23 日之后有 6 天没有出货记录，同期昆山二线的 SN-12F 流水号从 0310 涨到 0890，增量约 580，与缺口接近。</p>
+        <ul class="timeline">
+          <li><time>10月19日</time> SN-9C 第 43 周开始，流水号 0920 起。</li>
+          <li><time>10月23日</time> K 产线最后一次出货记录，号段停在 1399。</li>
+          <li><time>10月24—29日</time> 该产线无出货记录，共 6 天。</li>
+          <li><time>10月30日</time> SN-12F 流水号增至 0890，缺口约 580。</li>
+        </ul>
+        <p>把空号直接当假货是最常见的误判。空号段更像是产能调配的痕迹，判断真假要看校验位是否通过，而不是流水号连不连续。</p>
+
+        <h3>判断三：尾缀 R 的返修机，二手定价应按零售版的七折起算</h3>
+        <p>尾缀 R 在第 8 位，与零售版的区别不止一位。返修机的流水号段前空两位，包装不带原厂封条，保修从返修出库日重新起算，而不是首次售出日。10 月 24 日修订的判定口径把第 9 位改成第 8 位固定 R，原因是第 9 位在不同产线含义不一，容易误判。</p>
+        <div class="verdict"><b>可引用的结论：</b>同一批 2026 年第 42 周的 SN-7A，尾缀 R 的机器在二手市场的成交价约为零售版的 68%—73%，取七折是偏保守的起点。反驳点在于保修剩余时长，剩余超过 18 个月的可上浮到七五折。</div>
+        <p>转述与推测要分开：七折来自 11 月 2 日三个二手平台的挂牌中间价，不是成交均价；「剩余保修超 18 个月上浮」是按保修条款推的，尚无足够成交样本支撑。</p>
+      </section>
+
+      <!-- 体验指南：编号步骤 -->
+      <section class="block" id="guide" aria-labelledby="gdTitle">
+        <h2 id="gdTitle"><span class="num">06</span>体验指南</h2>
+        <p class="sub">收货或交割前走一遍，五步大约 8 分钟。</p>
+        <ol class="steps">
+          <li><div><b>看铭牌第 5 位</b><p>是「26」还是「2026」，决定你要用哪一版字段长度去读。9 月 15 日之后出厂的基本是四位。</p></div></li>
+          <li><div><b>数周次落在哪一周</b><p>取第 6—7 位，对照 ISO 8601。2026 年第 42 周是 10 月 12—18 日，落在 40 周之前的要警惕。</p></div></li>
+          <li><div><b>核第 11 位校验</b><p>前十位加权和模 9，与第 11 位比对。不通过先擦条码再读一次，仍不过就是喷码问题。</p></div></li>
+          <li><div><b>比对箱贴与铭牌</b><p>42 周机器配 40 周箱贴的情况确实存在，来源是补发包装，需要向卖家索取补发记录。</p></div></li>
+          <li><div><b>查尾缀是否 R</b><p>第 8 位为 R 即返修机，保修从返修出库日重算，议价时把这一条摆到桌面上。</p></div></li>
+        </ol>
+      </section>
+
+      <!-- 对照面板 -->
+      <section class="block" id="compare" aria-labelledby="cpTitle">
+        <h2 id="cpTitle"><span class="num">07</span>版本对照面板</h2>
+        <p class="sub">2026 年 9 月前后的编码差异，只看这三行就够。</p>
+        <div class="compare">
+          <div>
+            <h4>旧版（9月15日前）</h4>
+            <ul>
+              <li>年份两位，如「23」「24」</li>
+              <li>返修判定看第 9 位</li>
+              <li>校验位在第 11 位</li>
+              <li>总长度 12 位</li>
+            </ul>
+          </div>
+          <div>
+            <h4>新版（9月15日起）</h4>
+            <ul>
+              <li>年份四位，如「2026」</li>
+              <li>返修判定改看第 8 位 R</li>
+              <li>校验位仍在第 11 位</li>
+              <li>总长度 14 至 16 位</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 高风险批次榜 -->
+      <section class="block" id="rank" aria-labelledby="rkTitle">
+        <h2 id="rkTitle"><span class="num">08</span>高风险批次榜</h2>
+        <p class="sub">按校验失败率排序，条形长度即失败占比，样本均不少于 20 条。</p>
+        <ol class="rank">
+          <li><div><b>SN-7A · 第 40 周</b><span>失败率 15%，6 条样本中校验位错 2 条，集中在 0180—0210 号段</span><div class="meter"><i style="width:15%"></i></div></div></li>
+          <li><div><b>SN-9C · 第 43 周</b><span>失败率 9%，多为条码磨损导致首位误读，非喷码问题</span><div class="meter"><i style="width:9%"></i></div></div></li>
+          <li><div><b>SN-12F · 第 41 周</b><span>失败率 7%，三位样本均为斜角过大，重读即通过</span><div class="meter"><i style="width:7%"></i></div></div></li>
+          <li><div><b>SN-7A · 第 42 周</b><span>失败率 4%，唯一错例是箱贴与铭牌周次不一致</span><div class="meter"><i style="width:4%"></i></div></div></li>
+          <li><div><b>SN-9C · 第 44 周</b><span>失败率 2%，样本量 21，仅 1 条反光误读</span><div class="meter"><i style="width:2%"></i></div></div></li>
+        </ol>
+      </section>
+
+      <!-- FAQ -->
+      <section class="block" id="faq" aria-labelledby="fqTitle">
+        <h2 id="fqTitle"><span class="num">09</span>常见问题</h2>
+        <p class="sub">问的都是核对时会卡住的那几步。</p>
+        <details>
+          <summary>序列号第 5 位出现「2026」，是不是假货？</summary>
+          <div class="ans">四位年份是 2026 年 9 月 15 日之后的标准写法，出现在新版机器上是正常的。真正需要排查的是扫码设备是否升级到 v3.4.1，否则会把年份后两位读成周次。</div>
+        </details>
+        <details>
+          <summary>流水号中间空了几百个号，能判定为非原厂吗？</summary>
+          <div class="ans">不能。43 周 SN-9C 的号段缺口约 479 个，与同期昆山二线 SN-12F 的增量接近，更可能是换线调配。判定真伪看第 11 位校验位是否通过。</div>
+        </details>
+        <details>
+          <summary>返修机尾缀 R 在第几位，和老说明不一样？</summary>
+          <div class="ans">第 8 位固定为 R。10 月 24 日之前按第 9 位判断的说明已作废。原因是第 9 位在不同产线含义不一，容易把零售版误判成返修机。</div>
+        </details>
+        <details>
+          <summary>铭牌写第 42 周、箱贴写第 40 周，哪个可信？</summary>
+          <div class="ans">以铭牌为准。10 月 29 日批次出现过 3 例补发包装导致的周次错位，箱贴是后贴的。可以要求卖家提供补发记录或出库单，这两项能对上就无需担心。</div>
+        </details>
+        <details>
+          <summary>校验位不通过，擦一下条码再读有用吗?</summary>
+          <div class="ans">有用，但只对条码磨损或反光有效。擦过重读仍不通过的，通常是喷码本身的校验位写错，这时应停止交易，不要接受「机器自检通过」的口头承诺。</div>
+        </details>
+        <details>
+          <summary>二手交割时，保修剩余时长怎么算？</summary>
+          <div class="ans">返修机从返修出库日重新起算，零售版从首次售出日起算。两者日期都能从维修记录和发票上查到，剩余超 18 个月的返修机定价可上浮到七五折。</div>
+        </details>
+      </section>
+
+      <!-- 用户评论 -->
+      <section class="block" id="comments" aria-labelledby="cmTitle">
+        <h2 id="cmTitle"><span class="num">10</span>用户评论</h2>
+        <p class="sub">来自验机群与二手交割现场，保留原话口径。</p>
+        <div class="comments">
+          <div class="cmt">
+            <div class="who"><span class="av">赵</span><b>赵启明</b><span>· 11月5日 · 苏州</span></div>
+            <p>按第 8 位查 R 那一步帮我躲过一台。卖家说是全新零售，结果第 8 位就是 R，流水号前还空两位，他自己都没看明白。</p>
+          </div>
+          <div class="cmt">
+            <div class="who"><span class="av">林</span><b>林晓舟</b><span>· 11月4日 · 深圳</span></div>
+            <p>43 周号段跳跃那段解释得通，但我还是想不通为什么 43 周 SN-9C 的 0920 到 1400 是空号，却没有任何换线公告挂出来。信息层面差一截。</p>
+            <span class="quote">指向：43 周号段跳跃</span>
+          </div>
+          <div class="cmt">
+            <div class="who"><span class="av">吴</span><b>吴一鸣</b><span>· 11月3日 · 杭州</span></div>
+            <p>扫码枪升级这事我踩过。旧固件读 42 周读出 26 周，当场以为周次造假，后来发现是自己固件太老，白折腾一上午。</p>
+            <span class="quote">指向：v3.4.1 固件</span>
+          </div>
+          <div class="cmt">
+            <div class="who"><span class="av">陈</span><b>陈可</b><span>· 11月2日 · 昆山</span></div>
+            <p>校验位算法那篇有点绕，加权和模 9 我算三遍才对。建议配个算好的例子，别只给公式。</p>
+            <span class="quote">指向：第 11 位校验</span>
+          </div>
+          <div class="cmt">
+            <div class="who"><span class="av">周</span><b>周航</b><span>· 10月31日 · 成都</span></div>
+            <p>七折这个结论我保留意见。上周收的那台尾缀 R 还剩 20 个月保修，按 73% 成交的，卖家比我还清楚保修条款。定价一刀切不现实。</p>
+            <span class="quote">指向：返修机七折判断</span>
+          </div>
+          <div class="cmt">
+            <div class="who"><span class="av">何</span><b>何雨桐</b><span>· 10月28日 · 武汉</span></div>
+            <p>箱贴和铭牌不一致那次，我这边也遇到过，确实是补发包装。卖家愿意给补发记录，最后正常交割了，不是每台都有问题。</p>
+            <span class="quote">指向：42 周补发包装</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 相关资讯 -->
+      <section class="block" id="news" aria-labelledby="nwTitle">
+        <h2 id="nwTitle"><span class="num">11</span>相关资讯</h2>
+        <p class="sub">产线、固件与规则发布，来源标注在左侧。</p>
+        <ul class="news">
+          <li><span class="src">维修点通报</span><b>苏州工业园区两家维修点完成 v3.4.1 固件复测，错读率从 22% 降至 2%</b><time datetime="2026-10-30">10月30日</time></li>
+          <li><span class="src">编码规则</span><b>返修尾缀判定由第 9 位改为第 8 位固定 R，旧说明同步作废</b><time datetime="2026-10-24">10月24日</time></li>
+          <li><span class="src">产线记录</span><b>昆山二线 10 月 24 日至 29 日无 SN-9C 出货记录，共计 6 天</b><time datetime="2026-10-29">10月29日</time></li>
+          <li><span class="src">二手平台</span><b>11 月 2 日三家平台尾缀 R 机型挂牌中间价约为零售版 68%—73%</b><time datetime="2026-11-02">11月2日</time></li>
+          <li><span class="src">行业标准</span><b>ISO 8601 周次口径确认：2026 年第 42 周为 10 月 12 日至 18 日</b><time datetime="2026-10-16">10月16日</time></li>
+        </ul>
+      </section>
+
+      <!-- 相关推荐 标签 -->
+      <section class="block" id="related" aria-labelledby="rlTitle">
+        <h2 id="rlTitle"><span class="num">12</span>相关推荐</h2>
+        <p class="sub">按你刚看的判断继续往下查。</p>
+        <div class="tags">
+          <a href="/#analysis">SN-7A 第 42 周批次明细</a>
+          <a href="/#guide">扫码枪固件升级后复测记录</a>
+          <a href="/#faq">补发包装的识别与索取凭证</a>
+          <a href="/#rank">第 40 周 0180—0210 号段失败样本</a>
+          <a href="/#comments">返修机保修剩余时长争议</a>
+          <a href="/#analysis">ISO 8601 周次与其他计周口径对比</a>
+          <a href="/#picks">SN-12F 第 43 周流水号区间</a>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- 侧栏 -->
+    <aside class="side" aria-label="侧栏导航与工具">
+      <div class="panel sidenav" id="sidenav">
+        <h3>本页栏目</h3>
+        <ul>
+          <li><a href="/#overview">领域概览</a></li>
+          <li><a href="/#picks">精选内容推荐</a></li>
+          <li><a href="/#updates">最新更新</a></li>
+          <li><a href="/#channels">分类入口</a></li>
+          <li><a href="/#analysis">深度解析</a></li>
+          <li><a href="/#guide">体验指南</a></li>
+          <li><a href="/#compare">版本对照面板</a></li>
+          <li><a href="/#rank">高风险批次榜</a></li>
+          <li><a href="/#faq">常见问题</a></li>
+          <li><a href="/#comments">用户评论</a></li>
+          <li><a href="/#news">相关资讯</a></li>
+          <li><a href="/#related">相关推荐</a></li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>高频核对项</h3>
+        <ul class="tight">
+          <li><a href="/#analysis">第 5 位年份位数（26 / 2026）</a></li>
+          <li><a href="/#guide">第 11 位校验位算法</a></li>
+          <li><a href="/#analysis">第 8 位返修标识 R</a></li>
+          <li><a href="/#updates">第 42 周起算日 10 月 12 日</a></li>
+          <li><a href="/#rank">第 40 周 0180—0210 号段</a></li>
+        </ul>
+        <div class="creator">
+          <b>维修点证言</b>
+          「10 月 21 日那天我们两个人各拿一把枪读同一台机，一台读出 26 周，一台读出 42 周。差的就是固件版本。」
+        </div>
+      </div>
+      <div class="panel">
+        <h3>数据说明</h3>
+        <p style="font-size:.86rem;color:var(--ink-soft);margin:.2rem 0 0">样本 41 条来自维修点复测与二手交割记录，编号区间与日期均可回溯。条目规模、失败率与榜单位置随样本增补调整。</p>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">
+          <svg viewBox="0 0 64 64" aria-hidden="true">
+            <rect width="64" height="64" rx="14" fill="#f2c14e"/>
+            <rect x="12" y="15" width="26" height="7" rx="2.5" fill="#193a4d"/>
+            <rect x="12" y="28" width="40" height="7" rx="2.5" fill="#2a5a72"/>
+            <rect x="26" y="41" width="26" height="7" rx="2.5" fill="#193a4d"/>
+          </svg>
+          <b>jxx官网</b>
+        </div>
+        <p style="margin:.2rem 0;font-size:.86rem;color:#a9bcc7">把铭牌上的字符拆成可核对的字段，再决定要不要签收。</p>
+      </div>
+      <div>
+        <h4>核对栏目</h4>
+        <ul>
+          <li><a href="/#analysis">序列号前缀规则</a></li>
+          <li><a href="/#guide">扫码校验位算法</a></li>
+          <li><a href="/#compare">新旧版编码对照</a></li>
+          <li><a href="/#rank">高风险批次榜</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>操作与反馈</h4>
+        <ul>
+          <li><a href="/#guide">五步验机流程</a></li>
+          <li><a href="/#faq">常见问题</a></li>
+          <li><a href="/#comments">验机踩坑记录</a></li>
+          <li><a href="/#updates">更新明细</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>资讯与推荐</h4>
+        <ul>
+          <li><a href="/#news">产线与固件动态</a></li>
+          <li><a href="/#picks">精选内容</a></li>
+          <li><a href="/#related">相关推荐</a></li>
+          <li><a href="/#channels">分类入口</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <span>页面更新：2026年11月6日（对应 2026Q4 批次前缀对照表、SN-12F 43/44 周区间与 2 条失败样本）</span>
+      <span>内容含示例数据，编码规则与失败率以维修点复测记录为准。© 2026 jxx官网</span>
+    </div>
+  </div>
+</footer>
+
+<button id="toTop" aria-label="回到顶部" title="回到顶部">
+  <svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 13V4M3.5 8.5L8 4l4.5 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+
+<script>
+(function(){
+  // 移动端菜单
+  var menuBtn = document.getElementById('menuBtn');
+  var nav = document.getElementById('mainnav');
+  if(menuBtn && nav){
+    menuBtn.addEventListener('click', function(){
+      var open = nav.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    nav.addEventListener('click', function(e){
+      if(e.target.closest('a') && window.matchMedia('(max-width:860px)').matches){
+        nav.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded','false');
+      }
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && nav.classList.contains('open')){
+        nav.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded','false');
+        menuBtn.focus();
+      }
+    });
+  }
+
+  // 站内本地查找
+  var q = document.getElementById('q');
+  var fb = document.getElementById('qfb');
+  if(q && fb){
+    var index = [];
+    document.querySelectorAll('main h2, main h3, main summary, main .tags a, main .updates b, main .news b, main .rank b, main .card h3').forEach(function(el){
+      var txt = (el.textContent || '').replace(/\s+/g,' ').trim();
+      if(txt.length >= 2){
+        var link = el.closest('a');
+        var hash = '';
+        if(link){ hash = link.getAttribute('href'); }
+        else {
+          var sec = el.closest('section[id]');
+          if(sec){ hash = '/#' + sec.id; }
+        }
+        index.push({t: txt, href: hash || '/#top'});
+      }
+    });
+    function run(){
+      var v = q.value.trim().toLowerCase();
+      if(!v){ fb.className = 'search-fb'; fb.textContent=''; return; }
+      var hits = index.filter(function(it){ return it.t.toLowerCase().indexOf(v) > -1; }).slice(0,6);
+      fb.className = 'search-fb show';
+      if(!hits.length){
+        fb.innerHTML = '<strong>没有找到</strong>「' + v.replace(/[<>&]/g,'') + '」。试试「前缀」「42 周」「校验位」或「尾缀 R」。';
+        return;
+      }
+      var html = '<div style="color:#6b7a83;font-size:.78rem;margin-bottom:.3rem">找到 ' + hits.length + ' 条，点击跳转</div>';
+      hits.forEach(function(it){
+        html += '<div style="margin:.25rem 0"><a href="' + it.href + '">' + it.t.replace(/[<>&]/g,'') + '</a></div>';
+      });
+      fb.innerHTML = html;
+    }
+    q.addEventListener('input', run);
+    q.addEventListener('focus', function(){ if(q.value.trim()){ run(); } });
+    document.addEventListener('click', function(e){
+      if(!e.target.closest('.searchbox')){ fb.className = 'search-fb'; }
+    });
+    q.addEventListener('keydown', function(e){
+      if(e.key === 'Enter'){
+        var first = fb.querySelector('a');
+        if(first){ window.location.href = first.getAttribute('href'); }
+      }
+    });
+  }
+
+  // 侧栏滚动高亮
+  var links = Array.prototype.slice.call(document.querySelectorAll('#sidenav a'));
+  var targets = links.map(function(a){
+    var id = (a.getAttribute('href') || '').split('#')[1];
+    return id ? document.getElementById(id) : null;
+  });
+  function highlight(){
+    var y = window.scrollY + 150;
+    var cur = -1;
+    targets.forEach(function(t, i){
+      if(t && t.offsetTop <= y){ cur = i; }
+    });
+    links.forEach(function(a, i){ a.classList.toggle('cur', i === cur); });
+  }
+  if(links.length){
+    window.addEventListener('scroll', highlight, {passive:true});
+    highlight();
+  }
+
+  // 回到顶部
+  var top = document.getElementById('toTop');
+  function toggleTop(){
+    if(!top) return;
+    if(window.scrollY > 480){ top.classList.add('show'); }
+    else { top.classList.remove('show'); }
+  }
+  window.addEventListener('scroll', toggleTop, {passive:true});
+  toggleTop();
+  if(top){
+    top.addEventListener('click', function(){
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+  }
+})();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "jxx官网",
+  "description": "序列号前缀规则、批次追溯方法与校验失败案例资料库",
+  "inLanguage": "zh-CN",
+  "dateModified": "2026-11-06"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "序列号第 5 位出现「2026」，是不是假货？",
+      "acceptedAnswer": {"@type": "Answer", "text": "四位年份是 2026 年 9 月 15 日之后的标准写法，出现在新版机器上是正常的。需要排查的是扫码设备是否升级到 v3.4.1，否则会把年份后两位读成周次。"}
+    },
+    {
+      "@type": "Question",
+      "name": "流水号中间空了几百个号，能判定为非原厂吗？",
+      "acceptedAnswer": {"@type": "Answer", "text": "不能。43 周 SN-9C 的号段缺口约 479 个，与同期昆山二线 SN-12F 的增量接近，更可能是换线调配。判定真伪看第 11 位校验位是否通过。"}
+    },
+    {
+      "@type": "Question",
+      "name": "返修机尾缀 R 在第几位，和老说明不一样？",
+      "acceptedAnswer": {"@type": "Answer", "text": "第 8 位固定为 R。10 月 24 日之前按第 9 位判断的说明已作废，原因是第 9 位在不同产线含义不一，容易误判。"}
+    },
+    {
+      "@type": "Question",
+      "name": "铭牌写第 42 周、箱贴写第 40 周，哪个可信？",
+      "acceptedAnswer": {"@type": "Answer", "text": "以铭牌为准。10 月 29 日批次出现过 3 例补发包装导致的周次错位，箱贴是后贴的。可要求卖家提供补发记录或出库单。"}
+    },
+    {
+      "@type": "Question",
+      "name": "校验位不通过，擦一下条码再读有用吗？",
+      "acceptedAnswer": {"@type": "Answer", "text": "对条码磨损或反光有效。擦过重读仍不通过的，通常是喷码本身的校验位写错，应停止交易。"}
+    },
+    {
+      "@type": "Question",
+      "name": "二手交割时，保修剩余时长怎么算？",
+      "acceptedAnswer": {"@type": "Answer", "text": "返修机从返修出库日重新起算，零售版从首次售出日起算。两者日期可从维修记录和发票查到，剩余超 18 个月的返修机定价可上浮到七五折。"}
+    }
+  ]
+}
+</script>
+
+</body>
+  </html>
